@@ -4,9 +4,14 @@
 <div class="items-center flex justify-center flex-col ">
 
     <h1>Welcom to api Practice</h1>
-    <RouterLink to="/login" class="text-lg mt-9">
-        <PrimaryButton>login</PrimaryButton>
-   </RouterLink>
+    <div class="mt-9 ">
+        <RouterLink to="/login" class="text-lg me-4">
+            <PrimaryButton>login</PrimaryButton>
+        </RouterLink>
+        <RouterLink to="/register" class="text-lg mt-9">
+            <PrimaryButton>Register</PrimaryButton>
+        </RouterLink>
+    </div>
 </div>
     </div>
 

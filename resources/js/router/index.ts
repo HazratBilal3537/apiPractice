@@ -12,6 +12,16 @@ const routes = [
         component:()=> import('./../pages/Auth/Login.vue')
     },
     {
+        path:'/register',
+        name:'Register',
+        component:()=> import('./../pages/Auth/Register.vue')
+    },
+    {
+        path:'/forgotpassword',
+        name:'ForgotPassword',
+        component:()=> import('./../pages/Auth/ForgotPassword.vue')
+    },
+    {
         path:"/dashboard",
         name:'Dashboard',
         component:()=> import('../pages/Dashboard.vue')

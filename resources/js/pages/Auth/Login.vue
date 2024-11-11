@@ -1,6 +1,6 @@
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <!-- <Head title="Log in" /> -->
 
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
@@ -46,15 +46,16 @@
                     >
                 </label>
             </div>
+            <div class="mt-4 flex items-center justify-between">
+                <RouterLink to="/register" class="cursor-pointer underline"> Register</RouterLink>
+                <div>
+                <RouterLink to="/forgotpassword"
 
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
+
                     class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                     Forgot your password?
-                </Link>
+                </RouterLink>
 
                 <PrimaryButton
                     class="ms-4"
@@ -63,6 +64,7 @@
                 >
                     Log in
                 </PrimaryButton>
+            </div>
             </div>
         </form>
     </GuestLayout>
@@ -75,8 +77,10 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import {ref} from 'vue'
-import { Login } from '@/Types/Components/Login';
-
+import { RouterLink } from 'vue-router';
+// import { Auth } from '@/Types';
+import { Auth } from '@/Types';
+import axios from 'axios';
 const props = defineProps({
     canResetPassword: {
         type: Boolean,
@@ -86,19 +90,19 @@ const props = defineProps({
     },
 });
 
+const form=ref<Auth>({
+    email:''
+})
 
+const submit = async() => {
+    try {
+        const response = await axios.post('/api/login', form.value);
+        console.log('login response',response);
 
-const submit = () => {
-    // form.post(route('login'), {
-    //     onFinish: () => form.reset('password'),
-    // });
-
-    console.log('testing ',form.value);
-
+    } catch (error) {
+        console.log(error.message);
+    }
 };
 
-const form=ref<Login>({
-email:"",
-password:""
-})
+
 </script>
