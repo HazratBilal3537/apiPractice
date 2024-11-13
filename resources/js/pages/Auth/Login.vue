@@ -78,9 +78,11 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import {ref} from 'vue'
 import { RouterLink } from 'vue-router';
-// import { Auth } from '@/Types';
 import { Auth } from '@/Types';
 import axios from 'axios';
+import { useAuthStore } from '@/Store/Auth';
+
+
 const props = defineProps({
     canResetPassword: {
         type: Boolean,
@@ -93,15 +95,10 @@ const props = defineProps({
 const form=ref<Auth>({
     email:''
 })
+const authStore=useAuthStore();
 
 const submit = async() => {
-    try {
-        const response = await axios.post('/api/login', form.value);
-        console.log('login response',response);
-
-    } catch (error) {
-        console.log(error.message);
-    }
+await authStore.LoginAction(form.value)
 };
 
 

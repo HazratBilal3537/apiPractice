@@ -1,13 +1,4 @@
-<script setup>
-import { ref } from 'vue';
-// import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import Sidebar from '@/Components/Sidebar.vue';
-const showingNavigationDropdown = ref(false);
-</script>
+
 <template>
     <div>
         <div class="min-h-screen bg-gray-100">
@@ -40,7 +31,7 @@ const showingNavigationDropdown = ref(false);
                                         <span class="inline-flex rounded-md">
                                             <button type="button"
                                                 class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
-                                                name <svg class="-me-0.5 ms-2 h-4 w-4"
+                                                {{ userStore.user.name }} <svg class="-me-0.5 ms-2 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                     fill="currentColor">
                                                     <path fill-rule="evenodd"
@@ -51,7 +42,7 @@ const showingNavigationDropdown = ref(false);
                                         </span>
                                     </template>
                                     <template #content>
-                                        <DropdownLink> Profile </DropdownLink>
+                                        <DropdownLink to='/profile'> Profile </DropdownLink>
                                         <DropdownLink method="post" as="button"> Log Out </DropdownLink>
                                     </template>
                                 </Dropdown>
@@ -115,11 +106,37 @@ const showingNavigationDropdown = ref(false);
                     <div class="hidden sm:block">
                         <Sidebar />
                     </div>
-                    <div class="w-full">
-                        <slot />
+                    <div class="w-full ">
+                        <!-- <slot /> -->
+                         <RouterView/>
                     </div>
                 </div>
             </main>
         </div>
     </div>
 </template>
+<script setup>
+import { ref ,onMounted} from 'vue';
+// import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import Sidebar from '@/Components/Sidebar.vue';
+import { RouterView } from 'vue-router';
+import { useAuthStore } from '@/Store/Auth';
+import { useUserStore } from '@/Store/User';
+const userStore=useUserStore()
+
+const showingNavigationDropdown = ref(false);
+
+
+
+onMounted(async()=>{
+   await userStore.GetMeAction();
+})
+
+console.log('user',userStore.user);
+
+</script>
+

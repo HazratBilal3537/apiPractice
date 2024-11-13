@@ -1,9 +1,12 @@
 <template>
     <div class="pt-2 pb-3 space-y-1 w-44">
-        <ResponsiveNavLink >
-            <ion-icon name="bar-chart-outline"></ion-icon>
+        <ResponsiveNavLink to="/dashboard">
             Dashboard
         </ResponsiveNavLink>
+        <ResponsiveNavLink to="/dashboard/products">
+            Products
+        </ResponsiveNavLink>
+
     </div>
 </template>
 <script setup>
@@ -16,4 +19,6 @@ const toggleDropdown = () => {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+</style>

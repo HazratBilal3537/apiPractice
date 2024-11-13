@@ -1,13 +1,6 @@
 <template>
-    <AuthenticatedLayout>
-        <template #header>
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800"
-            >
-                Dashboard
-            </h2>
-        </template>
-
+    <div>
+   
         <div class="py-12">
             <div class=" ">
                 <div
@@ -19,9 +12,6 @@
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+</div>
 </template>
-<script setup lang="ts">
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
-</script>
