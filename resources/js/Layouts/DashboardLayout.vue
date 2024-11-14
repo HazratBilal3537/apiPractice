@@ -43,7 +43,7 @@
                                     </template>
                                     <template #content>
                                         <DropdownLink to='/profile'> Profile </DropdownLink>
-                                        <DropdownLink method="post" as="button"> Log Out </DropdownLink>
+                                        <DropdownLink to="" @click="logout()" > Log Out </DropdownLink>
                                     </template>
                                 </Dropdown>
                             </div>
@@ -126,7 +126,9 @@ import Sidebar from '@/Components/Sidebar.vue';
 import { RouterView } from 'vue-router';
 import { useAuthStore } from '@/Store/Auth';
 import { useUserStore } from '@/Store/User';
-const userStore=useUserStore()
+import router from '@/router';
+const userStore=useUserStore();
+const authStore=useAuthStore();
 
 const showingNavigationDropdown = ref(false);
 
@@ -136,7 +138,11 @@ onMounted(async()=>{
    await userStore.GetMeAction();
 })
 
-console.log('user',userStore.user);
+const logout=async()=>{
+   await authStore.logout()
+   window.sessionStorage.clear()
+    router.push('/login')
+}
 
 </script>
 

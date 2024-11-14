@@ -22,6 +22,11 @@ const routes = [
         component: () => import("./../pages/Auth/ForgotPassword.vue"),
     },
     {
+        path: "/api/password-reset",
+        name: "PasswrdReset",
+        component: () => import("./../pages/Auth/ResetPassword.vue"),
+    },
+    {
         path: "/dashboard",
         name: "Dashboard",
         component: () => import("./../Layouts/DashboardLayout.vue"),

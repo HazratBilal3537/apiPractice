@@ -8,7 +8,7 @@
                 <InputLabel for="email" value="Email" />
                 <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus
                     autocomplete="username" />
-                <!-- <InputError class="mt-2" :message="form.errors.email" /> -->
+                <InputError class="mt-2" :message="authStore.errorMessage" />
             </div>
             <div class="mt-4 flex items-center justify-end">
                 <PrimaryButton> Email Password Reset Link </PrimaryButton>
@@ -24,6 +24,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { ref } from 'vue';
 import axios from 'axios';
+import { useAuthStore } from '@/Store/Auth';
+const authStore=useAuthStore();
 defineProps({
     status: {
         type: String,
@@ -35,12 +37,6 @@ const form = ref({
 });
 
 const submit = async () => {
-    try {
-        const response = await axios.post('/api/forgot-password', form.value);
-        console.log('response', response);
-    } catch (error) {
-        console.log(error);
-
-    }
+    await authStore.forgotPasswordAction(form.value)
 };
 </script>

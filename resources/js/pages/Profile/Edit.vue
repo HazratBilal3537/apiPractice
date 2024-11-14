@@ -1,7 +1,4 @@
-
-
 <template>
-
     <div>
         <div header>
             <h2
@@ -25,7 +22,7 @@
                 <div
                     class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
                 >
-                    <!-- <UpdatePasswordForm class="max-w-xl" /> -->
+                    <UpdatePasswordForm class="max-w-xl" />
                 </div>
 
                 <div

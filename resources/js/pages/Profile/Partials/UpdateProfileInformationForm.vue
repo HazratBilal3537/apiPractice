@@ -93,17 +93,9 @@ import { computed, ref } from 'vue';
 import { useUserStore } from '@/Store/User';
 
 const userStore=useUserStore();
-let name=ref(userStore.user.name)
-computed(()=>{
-name.value=userStore.user.name
-})
 const form ={
-    name:userStore.user.name ,
+    name:userStore.user.name,
     email:userStore.user.email
 };
-console.log('user',form.value);
-setTimeout(() => {
-console.log(userStore.user.name);
 
-}, 3000);
 </script>

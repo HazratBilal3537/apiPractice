@@ -20,7 +20,7 @@
                     autocomplete="username"
                 />
 
-                <!-- <InputError class="mt-2" :message="form.errors.email" /> -->
+                <!-- <InputError class="mt-2" :message="authStore.errorMessage" /> -->
             </div>
 
             <div class="mt-4">
@@ -46,6 +46,7 @@
                     >
                 </label>
             </div>
+            <InputError class="mt-2" :message="authStore.errorMessage" />
             <div class="mt-4 flex items-center justify-between">
                 <RouterLink to="/register" class="cursor-pointer underline"> Register</RouterLink>
                 <div>
@@ -56,6 +57,7 @@
                 >
                     Forgot your password?
                 </RouterLink>
+
 
                 <PrimaryButton
                     class="ms-4"
