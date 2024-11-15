@@ -147,4 +147,14 @@ class AuthController extends Controller
             'message' => 'logout successfully.',
         ]);
     }
+
+    public function deleteUser(Request $request){
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
+        $user=Auth::user();
+        $user->delete();
+
+
+    }
 }

@@ -45,7 +45,6 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { ref } from 'vue';
-import axios from 'axios';
 import { useAuthStore } from '@/Store/Auth';
 const authStore=useAuthStore();
 const form = ref({
@@ -56,15 +55,6 @@ const form = ref({
 });
 
 const submit = async () => {
-    console.log('click', form.value);
-
     await authStore.registerAction(form.value)
-    // try {
-    //     const response = await axios.post('/api/register', form.value);
-    //     console.log(response);
-
-    // } catch (error) {
-    //     console.log(error.message);
-    // }
 };
 </script>

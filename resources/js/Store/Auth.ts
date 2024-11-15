@@ -12,7 +12,7 @@ export const useAuthStore = defineStore('authStore', {
         async registerAction(user:object) {
             try {
                 const response = await axios.post('/api/register',user);
-                console.log('register',response.data);
+                // console.log('register',response.data);
                 window.sessionStorage.setItem('token',response.data.token)
                 this.user=response.data.user;
                 router.push('/dashboard')
@@ -26,13 +26,27 @@ export const useAuthStore = defineStore('authStore', {
             try {
                 const response = await axios.post('/api/login', user);
                 this.user=response.data.user;
-                console.log('login',this.user);
+                // console.log('login',this.user);
                 window.sessionStorage.setItem('token',response.data.token)
                 router.push('/dashboard')
 
             } catch (error) {
                 console.error("Error Login:", error.response.data.message);
                 this.errorMessage=error.response.data.message
+            }
+        },
+        // login with google
+        async loginGoogleAction() {
+            try {
+                const response = await axios.get('/api/login/google');
+
+                console.log('login',response.data);
+                // window.sessionStorage.setItem('token',response.data.token)
+                // router.push('/dashboard')
+
+            } catch (error) {
+                console.error("Error Login:", error);
+                // this.errorMessage=error.response.data.message
             }
         },
         async forgotPasswordAction(email:object) {
@@ -47,7 +61,7 @@ export const useAuthStore = defineStore('authStore', {
         async ResetPasswordAction(user:object) {
             try {
                 const response = await axios.post('/api/password-reset', user);
-                console.log('reset password',response.data);
+                // console.log('reset password',response.data);
                 router.push('/login')
             } catch (error) {
                 console.error("Error resete password:", error);
@@ -61,7 +75,7 @@ export const useAuthStore = defineStore('authStore', {
                         Authorization:`Bearer ${token}`
                     }
                 });
-                console.log('update password',response.data);
+                // console.log('update password',response.data);
             } catch (error) {
                 console.error("Error update password:", error);
                 this.errorMessage=error.response.data.message
@@ -75,13 +89,27 @@ export const useAuthStore = defineStore('authStore', {
                         Authorization:`Bearer ${token}`
                     }
                 })
-                console.log(response.data);
+                // console.log(response.data);
             }
             catch(error){
-                console.log('error in logout', error);
+                console.error('error in logout', error);
 
             }
+        },
+        async deleteUser(user) {
+            try {
+                const response = await axios.delete('/api/user-delete', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    data: user // Include data under the 'data' key in the config object
+                });
+                console.log(response.data);
+            } catch (error) {
+                console.error("Error deleting user:", error);
+            }
         }
+
     },
 });
 
