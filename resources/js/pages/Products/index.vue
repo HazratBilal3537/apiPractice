@@ -1,11 +1,12 @@
 <template>
+
         <div class="flex justify-between items-center">
             <div>
                 <!-- <TextInput @keyup="searchEmployees" v-model="form.search"  placeholder="Search for name, email"/> -->
-                <TextInput />
+                <TextInput @keyup="searchProduct" v-model="inpudata" />
             </div>
             <div class=" rounded-md my-5 ">
-                <PrimaryLink @click="$router.push('/dashboard/addproduct')">Add Product</PrimaryLink>
+                <PrimaryLink @click="$router.push('/dashboard/addproduct')">Add Product </PrimaryLink>
             </div>
         </div>
         <div
@@ -101,19 +102,27 @@
                         </td>
                     </tr>
             </tbody>
+
             </table>
+            <div class="m-auto">
+                <span v-if="!productStore.products.length">no data</span>
+                <InputError class="mt-2" :message="productStore.errorMessage" />
+
+            </div>
         </div>
+
 
 </template>
 <script setup lang="ts">
 import DangerButton from '@/Components/DangerButton.vue';
+import InputError from '@/Components/InputError.vue';
 import PrimaryLink from '@/Components/PrimaryLink.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { useAuthStore } from '@/Store/Auth';
 import { useProductStore } from '@/Store/Products';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
-
+const inpudata=ref('')
 const productStore=useProductStore();
 onMounted(() => {
     productsCall()
@@ -129,5 +138,11 @@ const updateProduct = (id: number) => {
 }
 const destroyProduct = (id: number) => {
     console.log(id);
+}
+
+
+// search product
+const searchProduct = async (data:string) => {
+  await productStore.searchAction(inpudata.value);
 }
 </script>

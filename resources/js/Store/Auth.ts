@@ -42,7 +42,7 @@ export const useAuthStore = defineStore('authStore', {
 
                 console.log('login',response.data);
                 // window.sessionStorage.setItem('token',response.data.token)
-                // router.push('/dashboard')
+                window.location.href=response.data.url;
 
             } catch (error) {
                 console.error("Error Login:", error);

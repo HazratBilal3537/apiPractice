@@ -17,7 +17,6 @@ export const useUserStore = defineStore('userStore', {
                     }
                 });
                 this.user=response.data;
-                console.log('login',response.data);
 
             } catch (error) {
                 console.error("Error get me api", error);

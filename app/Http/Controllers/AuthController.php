@@ -90,6 +90,7 @@ class AuthController extends Controller
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6|confirmed',
+            'role'  => 'string'
         ]);
 
         $status = Password::reset(

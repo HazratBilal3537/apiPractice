@@ -18,6 +18,18 @@ class ProductController extends Controller
         ]);
     }
 
+    // produc search querry
+    public function search(Request $request)
+    {
+        $search = strtolower($request->query('query'));
+        // using reusable query for search 
+        $product = Product::searchByName($search)->get();
+
+        return response()->json([
+            'data'=>$product,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
