@@ -27,6 +27,11 @@ const routes = [
         component: () => import("./../pages/Auth/ResetPassword.vue"),
     },
     {
+        path: "/googleRedirecting",
+        name: "GoogleRedirecting",
+        component: () => import("./../pages/Auth/googleRedirecting.vue"),
+    },
+    {
         path: "/dashboard",
         name: "Dashboard",
         component: () => import("./../Layouts/DashboardLayout.vue"),

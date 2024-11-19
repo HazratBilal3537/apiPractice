@@ -14,9 +14,8 @@ Route::post('/password-reset', [AuthController::class, 'resetpassword'])->name('
 Route::group(['middleware' => ['web']], function () {
     // your routes here
     Route::get('login/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
-    Route::get('login/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+    Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 });
-
 
 Route::middleware('auth:sanctum')->group(function () {
     // end Auth api

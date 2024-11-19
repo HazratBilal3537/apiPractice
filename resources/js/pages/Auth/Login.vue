@@ -35,9 +35,11 @@
         </form>
         <hr class="my-7">
         <p>or sigin with</p>
-        <button @click="loginWithGoogle()" class="mt-5">
+
+        <a href="/api/login/google" class="mt-5 inline-block">
             <GoogleIcon />
-        </button>
+        </a>
+
     </GuestLayout>
 </template>
 <script setup lang="ts">
@@ -71,9 +73,7 @@ const authStore = useAuthStore();
 const submit = async () => {
     await authStore.LoginAction(form.value)
 };
-const loginWithGoogle = async () => {
-    await authStore.loginGoogleAction();
-}
+
 
 
 </script>

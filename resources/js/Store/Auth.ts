@@ -35,20 +35,7 @@ export const useAuthStore = defineStore('authStore', {
                 this.errorMessage=error.response.data.message
             }
         },
-        // login with google
-        async loginGoogleAction() {
-            try {
-                const response = await axios.get('/api/login/google');
-
-                console.log('login',response.data);
-                // window.sessionStorage.setItem('token',response.data.token)
-                window.location.href=response.data.url;
-
-            } catch (error) {
-                console.error("Error Login:", error);
-                // this.errorMessage=error.response.data.message
-            }
-        },
+    
         async forgotPasswordAction(email:object) {
             try {
                 const response = await axios.post('/api/forgot-password', email);

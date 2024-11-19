@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $search = strtolower($request->query('query'));
-        // using reusable query for search 
+        // using reusable query for search
         $product = Product::searchByName($search)->get();
 
         return response()->json([

@@ -43,8 +43,6 @@ export const useProductStore = defineStore('productStore', {
                     }
                 });
                 this.products = response.data.data;
-                    console.log(this.products);
-
 
             } catch (error) {
                 console.error("Error searchin product:", error.response.data.message);
