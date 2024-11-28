@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProductController;
+use App\Mail\TestEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register'])->name('user.register');
@@ -15,6 +18,8 @@ Route::group(['middleware' => ['web']], function () {
     // your routes here
     Route::get('login/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
     Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
 });
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -24,9 +29,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/user-delete', [AuthController::class, 'deleteUser'])->name('user-delete');
     // end getMe api
     Route::middleware('role:admin')->group(function () {
-        Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+        // Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+        Route::post('/add/products', [ProductController::class, 'store'])->name('add.products');
         Route::get('/search/product', [ProductController::class, 'search'])->name('search.product');
     });
     Route::post('/update-password', [AuthController::class, 'updatePassword'])->name('update.Password');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/sendEmail', [MailController::class, 'sendEmail'])->name('sendEmail');
+
 });

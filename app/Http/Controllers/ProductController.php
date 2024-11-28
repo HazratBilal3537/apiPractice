@@ -2,17 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $products=Product::all();
+///////////////////////////////////////////////////////////////////// store data in cookies
+
+        // Cookie::queue('cokkeiskey', 'value of coookies', 700);
+        // $cookies = $request->cookies->get('cokkeiskey');
+        // dd($cookies);
+///////////////////////////////////////////////////////////////////// store data in session
+        $request->session()->put('session_key','values of the session');
+      $sessiondata=  $request->session()->get('session_key');
+        dd($sessiondata);
         return response()->json([
             'data'=>$products,
         ]);
@@ -35,15 +46,16 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+
     }
 
     /**

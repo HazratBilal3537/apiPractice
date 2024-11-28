@@ -9,7 +9,6 @@ import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 const route=useRoute();
 onMounted(()=>{
-    console.log(route.query.token);
     window.sessionStorage.setItem('token',route.query.token)
     router.push('dashboard')
 

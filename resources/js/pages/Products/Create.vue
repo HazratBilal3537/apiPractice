@@ -18,8 +18,8 @@
 
                 <!-- Email -->
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input id="email" type="email" v-model="form.email"
+                    <label for="price" class="block text-sm font-medium text-gray-700">price</label>
+                    <input id="price" type="text" v-model="form.price"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
                     <!-- <InputError class="mt-2" :message="form.errors.email" /> -->
 
@@ -27,38 +27,48 @@
 
                 <!-- Phone -->
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                    <input id="phone" type="tel" v-model="form.phone"
+                    <label for="quantity" class="block text-sm font-medium text-gray-700">quantity</label>
+                    <input id="quantity" type="text" v-model="form.quantity"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
                     <!-- <InputError class="mt-2" :message="form.errors.phone" /> -->
 
                 </div>
 
-                <!-- Position -->
+                <!-- category -->
                 <div>
-                    <label for="position" class="block text-sm font-medium text-gray-700">Position</label>
-                    <input id="position" type="text" v-model="form.position"
+                    <label for="category" class="block text-sm font-medium text-gray-700">category</label>
+                    <input id="category" type="text" v-model="form.category"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
                     <!-- <InputError class="mt-2" :message="form.errors.position" /> -->
 
                 </div>
 
-                <!-- Hire Date -->
+                <!-- image -->
                 <div>
-                    <label for="hire_date" class="block text-sm font-medium text-gray-700">Hire Date</label>
-                    <input id="hire_date" type="date" v-model="form.hire_date"
+                    <label for="category" class="block text-sm font-medium text-gray-700">image</label>
+                    <input id="category" type="file" @change="imageUpload"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
-                    <!-- <InputError class="mt-2" :message="form.errors.hire_date" /> -->
 
                 </div>
 
-                <!-- Address -->
+                <!-- Hire Date -->
                 <div>
-                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                    <textarea id="address" v-model="form.address" rows="3"
+                    <label for="Avaialble" class="block text-sm font-medium text-gray-700">Avaialble</label>
+                    <select id="status" v-model="form.avaialble"
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-3">
+                        <option value="1">yes</option>
+                        <option value="0">No</option>
+                    </select>
+
+                </div>
+
+
+                <!-- description -->
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea id="description" v-model="form.description" rows="3"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
                     <!-- <InputError class="mt-2" :message="form.errors.address" /> -->
-
                 </div>
 
                 <!-- Status -->
@@ -72,9 +82,6 @@
                     <!-- <InputError class="mt-2" :message="form.errors.status" /> -->
 
                 </div>
-
-
-
                 <!-- Submit Button -->
                 <div class="flex justify-end">
                     <button type="submit"
@@ -85,32 +92,56 @@
             </form>
         </div>
 </template>
-<script setup>
+<script setup lang="ts">
 // import DangerButton from "./../../components/DangerButton.vue"
 import TextArea from "@/Components/TextArea.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryLink from "@/Components/PrimaryLink.vue";
-
 import { ref } from "vue";
+import { Products } from "@/Types";
+import { useProductStore } from "@/Store/Products";
+const image = ref<File | null>(null); // Set the type to File or null
+const productStore=useProductStore()
+const imageUpload = (event: any) => {
+    const file = event.target.files[0]; // Access the first file in the FileList
+    if (file) {
+        image.value = file;
+    }
+};
 
-
-const form = ref({
+const form = ref<Products>({
     name: "",
-    email: "",
-    phone: "",
-    position: "",
-    hire_date: "",
-    address: "",
+    quantity: "",
+    category: "",
+    description: "",
+    avaialble: "",
     status: "",
-    company_id :1,
+    image :image.value,
 });
 
 
 
-const submit = () => {
-    form.post(route("employees.store"));
+const submit = async()  => {
+       // Create FormData to handle the form submission
+       const formData = new FormData();
+
+// Append regular fields
+formData.append('name', form.value.name);
+formData.append('quantity', form.value.quantity);
+formData.append('category', form.value.category);
+formData.append('description', form.value.description);
+formData.append('avaialble', form.value.avaialble);
+formData.append('status', form.value.status);
+
+// Append the image if it's selected
+if (image.value) {
+    formData.append('image', image.value); // The image file
+}
+
+await productStore.addProduct(formData);
+
 };
 
 </script>

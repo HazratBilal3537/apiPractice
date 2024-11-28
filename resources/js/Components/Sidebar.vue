@@ -6,6 +6,9 @@
         <ResponsiveNavLink to="/dashboard/products">
             Products
         </ResponsiveNavLink>
+        <ResponsiveNavLink to="/emaildemo">
+            Vue Email Editor
+        </ResponsiveNavLink>
 
     </div>
 </template>

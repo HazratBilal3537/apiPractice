@@ -22,5 +22,20 @@ export const useUserStore = defineStore('userStore', {
                 console.error("Error get me api", error);
             }
         },
+        async sendEmail(emailHtml:any) {
+            try {
+                const response = await axios.post('/api/sendEmail',{'html':emailHtml},{
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                });
+                // this.user=response.data;
+                console.log('response email',response.data);
+
+
+            } catch (error) {
+                console.error("Error esponse emai api", error);
+            }
+        },
     },
 });

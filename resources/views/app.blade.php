@@ -6,6 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>api Practice</title>
         @vite(['resources/js/app.ts', 'resources/css/app.css'])
+
+        <style>
+            .blockbuilder-branding{
+    display: none !important;
+}
+        </style>
 	</head>
 	<body>
 		<div id="app">

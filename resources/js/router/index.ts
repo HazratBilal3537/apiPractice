@@ -32,6 +32,11 @@ const routes = [
         component: () => import("./../pages/Auth/googleRedirecting.vue"),
     },
     {
+        path: "/emaildemo",
+        name: "Email Demo",
+        component: () => import("./../pages/VueEmailEditor.vue"),
+    },
+    {
         path: "/dashboard",
         name: "Dashboard",
         component: () => import("./../Layouts/DashboardLayout.vue"),

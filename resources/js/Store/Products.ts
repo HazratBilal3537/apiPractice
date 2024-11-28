@@ -26,8 +26,14 @@ export const useProductStore = defineStore('productStore', {
         },
         async addProduct(product:object) {
             try {
-                const response = await axios.post('/api/products', product);
-                this.products.push(response.data);
+                const response = await axios.post('/api/add/products', product,{
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                });
+                // this.products.push(response.data);
+                console.log('products',response.data);
+
             } catch (error) {
                 console.error("Error adding product:", error.response.data.message);
                 this.errorMessage=error.response.data.message
