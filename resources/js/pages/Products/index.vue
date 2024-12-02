@@ -46,7 +46,7 @@
                         </th>
                         <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                             <p
-                                class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"> Avaialble
+                                class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"> is_active
                             </p>
                         </th>
 
@@ -66,9 +66,11 @@
                                 {{ product.id }} </p>
                         </td>
                         <td class="p-4 border-b border-blue-gray-50">
-                            <p
+                            <!-- <p
                                 class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                {{ product.image }} </p>
+                                {{ product.image }} </p> -->
+                                 <img :src="product.image" class="w-20" alt="">
+
                         </td>
                         <td class="p-4 border-b border-blue-gray-50">
                             <p

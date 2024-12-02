@@ -2,7 +2,7 @@
     <div id="app">
         <div class="">
             <div id="bar" class="bg-purple-500 flex justify-between py-3">
-                <h1 class="text-lg text-black  font-bold">Vue Email Editor (Demo)</h1>
+                <h1 class="text-lg text-black  font-bold">Vue Email Editor</h1>
                 <div>
                     <button class="bg-green-500 p-2" @click="saveDesign">Save Design</button>
                     <button class="bg-green-500 p-2 mx-4" @click="loadDesign">load design </button>
@@ -21,7 +21,6 @@ import { ref } from 'vue';
 import { EmailEditor } from 'vue-email-editor';
 const emailEditor = ref(null);
 const userStore = useUserStore();
-
 
 const saveDesign = () => {
     emailEditor.value.editor.saveDesign((design) => {
@@ -66,7 +65,6 @@ const sendEmail = async () => {
         await userStore.sendEmail(data.html);
     });
 
-    //   await userStore.sendEmail(emailHtml);
 }
 </script>
 <style>

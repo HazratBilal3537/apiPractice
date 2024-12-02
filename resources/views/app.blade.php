@@ -8,9 +8,9 @@
         @vite(['resources/js/app.ts', 'resources/css/app.css'])
 
         <style>
-            .blockbuilder-branding{
-    display: none !important;
-}
+.unlayer-powered-by {
+  display: none !important;
+}  
         </style>
 	</head>
 	<body>

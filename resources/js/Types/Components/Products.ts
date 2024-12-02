@@ -5,6 +5,7 @@ export type Products={
     image?:any,
     status?: string;
     avaialble?: string;
+    price?: string;
     address?: String,
     description?: string
 }

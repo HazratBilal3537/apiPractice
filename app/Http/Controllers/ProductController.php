@@ -16,14 +16,10 @@ class ProductController extends Controller
     {
         $products=Product::all();
 ///////////////////////////////////////////////////////////////////// store data in cookies
-
-        // Cookie::queue('cokkeiskey', 'value of coookies', 700);
-        // $cookies = $request->cookies->get('cokkeiskey');
-        // dd($cookies);
-///////////////////////////////////////////////////////////////////// store data in session
-        $request->session()->put('session_key','values of the session');
-      $sessiondata=  $request->session()->get('session_key');
-        dd($sessiondata);
+foreach($products as $product){
+    $product->image =   asset($product->image);
+    // dd($product);
+}
         return response()->json([
             'data'=>$products,
         ]);
@@ -54,7 +50,25 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        $validatedData = $request->validated();
+
+        // $request->validated();
+        $imageName = time().'.'.$request->image->extension();
+        // dd('testing',$request);
+        $request->image->move(public_path('images'), $imageName);
+
+        $product=new Product();
+        $product->name=$request->name;
+        $product->description=$request->description;
+        $product->price=$request->price;
+        $product->quantity=$request->quantity;
+        $product->category=$request->category;
+        $product->image= 'images/'.$imageName;
+        $product->is_active=$request->is_active;
+        $product->save();
+
+        return response()->json([
+            'success'=>'produc create successfully'
+        ]);
 
     }
 
